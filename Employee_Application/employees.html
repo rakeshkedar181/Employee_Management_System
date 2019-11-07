@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "ISO-8859-1">
+<title>Employee Details</title>
+</head>
+<body>
+	<h1>Employee Details</h1>
+	<table border="1">
+		<tr>
+			<th>Number</th>
+			<th>Name</th>
+			<th>Daily Salary</th>
+			<th>Action</th>
+		</tr>
+		{% if result %}
+		{% for row in result %}
+		<tr>
+			<td>{{row.empno}}</td>
+			<td>{{row.name}}</td>
+			<td>{{row.salary_per_day}}</td>
+			<td>
+				<form action="./emp/delete" method="POST">
+					<input name="id" value="{{ row['empno'] }}" type="hidden">
+					<input type="submit" value="Delete">
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+		<tr>
+			
+		</tr>
+		<tr>
+			<td colspan="3"><span id="emp_count">{{(result|count)}}</span> Employees Found</td>
+		</tr>
+		{% endif %}
+	</table>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<table>
+		<form method="post" action="./emp/register">
+			<tr>
+				<td>Number:</td>
+				<td><input name="empno" id="f-empno"></td>
+			</tr>
+			<tr>
+				<td>Employee Name:</td>
+				<td><input name="name" id="f-name"></td>
+			</tr>
+			<tr>
+				<td>Daily Salary:</td>
+				<td><input name="salary" id="f-salary"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Register" id="btn-register"></td>
+				<td><input type="reset"></td>
+			</tr>
+		</form>
+	</table>
+</body>
+</html>
