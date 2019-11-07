@@ -1,0 +1,235 @@
+Setting up Python Virtual Environment
+a. Install Python V-Env Packages
+	a. Installation Path
+		i. User : C:\Users\<User-dir>\Appdata\Programs\Python\Python36-32
+		ii.System: C:\Python36-32
+	i. pip install : virtualenv, adds the virtual env libraries virtualenvwrapper, additional commands
+			virtualenvwrapper-win to setup on windows OS
+
+	ii. lsvirtualenv: list all virtual environment
+	iii. mkvirtualenv <name> : create new virtualenv using the name
+	iv. work-on <name>: Switch to a virtual environment
+	v. deactivate : exit the virtual environment
+	vi. rmvirtualenv <name>: remove the virtual environment
+	vii. In the virtual environment
+		a. pip list: check the packages installed
+		b. pip install <package-name>: install new package
+		c. pip uninstall <package-name>: 
+				uninstall existing package
+		for package upgrade
+		mysqlconnector 1.7 -> mysqlconnector 2.5
+		uninstall <old-package-name>
+		install <new-package-name>
+Programming constructs
+1. COnfiguration of Eclipse|PyCharm|Anaconda
+	a. Perspective : PyDev Plugin
+	b. Window Preferences -> Python Interpreter -> Virtual Env dir
+	c. Create PyDev Project
+	d. Create Pydev Package
+	e. Create PyDev Module
+		a. Main Module: Python Module with main method
+		b. Class Module: Python Module with class declaration
+		c. Unit Test Module: Create a Unit Test Case module
+2. Data Types
+	i. Primitive Datatypes: int,float
+	ii.Sequence Types: list,tuple, Dictionary, String
+		i. Tuple: immutable collection of objects, internally used for string
+		ii. List: mutable collection of objects
+		iii. dictionary: list of items with key value pair, 
+			used for object state management to support OOP
+		iv. subscript usage in python
+			list[n],list[-nfromright],list[start:end],list[key] 
+3. Control Structure
+	i. Selection: if <condition>: - elif <condition>: - else:
+	ii. Iteration: while <condition>: , for <elem> in <collection>:
+4. Function in Python
+	a. def <fn_name>(param_name=default,....):
+		[return <expression>] optional
+	b. if __name__ == "__main__": Main start point of execution
+5. Object Oriented Programming
+	a. declaring CLasses in python
+		i. class <name> (<base>) [default base class:object]
+		ii.constructor : def __init__(self,<params>):
+		iii. public object function: def <name>(self,<params>)
+		iv. private/protected function: 
+			def __[private]/_protected<name>(self,<params>)
+		v. class methods: uses class scope to share data across object
+			@classmethods
+			def <name>(cls,<params>):
+		vi. static methods: uses no scope of existing class/object
+			@staticmethod
+			def <name>(<params>):
+		vii. system/internal methods
+			__str__: print the state of the object
+			__getattr__: get attribute using self.<attr-name>
+			__setattr__: set attribute using self.<attr-name>=<value>
+			__delattr__: delete attribute using del self.<attr-name>
+	b. Helper functions
+		a. print("Message"): print in console
+		b. input("Prompt"): get input from console
+		c. conversion function: int(), str(), float()
+		d. len(<sequence>): get the length of sequence type
+	c. Inheritance 
+		a. class <name> (base1,base2,base3):
+		b. to access base class member  
+			<Base-class_name>.<member>(params)
+		c. Overriding : business function : _calculate_salary
+				Internal Function: __str__
+6. Exception Handling
+	a. try: block to enclose all the code which may raise error
+	b. except <Error>: handle specified <Error> at runtime
+	c. except: handle generic/all error at runtime
+	d. else: execute set of code on successful execution
+	e. finally: use to execute at end of try block for both success/error condition
+	f. raise : used to raise Exception on business condition
+
+7. Unit Testing in Python:
+a. Create the unit Test class named as <typeofTests>Test(unittest.TestCase)
+b. the base class would be unittest.TestCase, to use the assert<Condition>*()
+c. Setup and tearDown method
+	In Setup: use self.<attribute> to share objects 
+	created in setup environment across all the tests
+	In Teardown: release the objects created using del self.<attribute>
+d. Each method as a test named as test_<test_case_name> to be managed by Unit Test case
+e. call the unittest.main() method in main module to execute all the tests
+	it will detect all the unitTest case classes and 
+	executes all the test case methods 
+
+
+Storage using Databases
+9. Manage data persistence in MySQL Database [mysql-connector-python API]
+	a. identify the database connector and install the connector library in python 			    environment using pip 
+		command prompt: pip list : displays all the packages
+				pip install <package-name> 
+	b. connect to the mysql database 
+		connect(user='root',password='M8$tek12', database='training',port=3316)
+	c. Create the cursor from the connection
+		connection.cursor()
+	d. Executing DML: [insert,update,delete]
+		cursor.execute(sql,(param1,param2))
+		connection.commit()
+	e. Executing Select Queries
+		cursor.execute(sql,(params))
+		for (field1,field2) in cursor
+			<access the data fetched from cursor>
+	f. Closing the cursor and connection
+		cursor.close(),connection.close()
+
+Application development using Flask [pip install flask]
+	a. Declare the application to be managed by Flask
+		app = Flask(__name__)
+	b. Identify the routes to create API and support with the functionality
+		@<name>.route("/<url>",methods=["<http-method>"])
+	c. host the application
+		    app.run(port=<number>)	
+	d. Return the content in String or JSON Format using JSON Pickle
+	e. Manage Web Applications using templating Engine
+		i. render_template(<page>,results={obj},content_type='application/json')
+		ii.{% if result %} {% <control statements> %} {% end block %}
+		iii. Access data members {{<data>}} to be printed in list
+		iv. redirect(/<url>) to switch pages and form, refresh contents	
+
+8. Behavior Driven Development [behave API]
+	Implementing Behaviors using Features 
+	a. install the behave framework to manage BDD, pip install behave , pip install nose
+	b. Create the folder structure for each project
+		[application-Project]
+			|-> [features]
+				|-> *.feature
+				|-> [steps]
+					|-> *.py[@given,@then,@whendef fx()]
+	c. Identify the User Story/Epic to create the feature file
+		i. declare the Feature : <name and description>
+		ii. declare one or more Scenarios
+			Scenario: <Name and description>
+		iii. Identify the Steps in Scenario
+			Scenario: <Name and description>
+				Given <the task to be done>
+				|label1|label2|labeln|
+				|value1|value2|valuen|
+				When <check the requirements and options>
+				Then <check the output and conditions>
+	d. Create the Python module for steps mapping the Scenarios
+		i. Identify the each Step : @Given(<desc>),@When(<desc>)@Then(<desc>)
+		ii. define function to process each step with context as env parameter
+			def <name>(context)
+		iii. for access the table data, context.table in iteration
+		iv. Write Assertions using assert <condition> <message for error>
+			nose.utils.ok_(<condition>,<message for error>)
+	e. Identify the Project Directory as the working directory 
+		setup external toos -> run -> external toos -> 
+		external tools configuration -> under program -> 
+		click new configuration -> locate to behave.exe in the virtual env(C:\Users\rakesh13575\Envs\training-oct19\Scripts\behave.exe)
+		-> apply -> run
+		execute the behave: 
+		a. identifies all the features in feature/*.feature
+		b. validates each Step in Scenarios in steps/<module>.py functions
+		c. Executes the scenario using the feature file
+		d. summarizes the Features/Scenarios/Steps with success, failure
+	In Eclispe, configure the external tool configuration as a program
+		to run the command in the Eclipse environment
+
+Application Test Automation
+i. use Behave BDD to manage automation testing using Python
+ii. Web Testing Using Selenium
+	a. Load the Driver: webdriver.<Browser>()
+	b. Load the URL in Browser driver.get(<URL>)
+	c. Identify the elements, search criteria and Actions
+		driver.find_element_by_<criteria>("value").text/click(),send_keys(text)
+	d. driver.save_Screenshot("path)
+
+
+
+		
+		
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
